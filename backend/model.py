@@ -24,8 +24,6 @@ _V1_THRESHOLD_PATH = os.path.join(BASE_DIR, "threshold.json")
 # =============================================================================
 
 class EnsembleModel:
-    import sys
-    sys.modules['__main__'].EnsembleModel = EnsembleModel
     """XGBoost + LightGBM rank-average ensemble (must match training class)."""
 
     def __init__(self, xgb_model, lgb_model, weight_xgb=0.5, weight_lgb=0.5):
@@ -58,6 +56,8 @@ class EnsembleModel:
         p_lgb = float(self.lgb.predict_proba(X)[0, 1])
         return p_xgb, p_lgb
 
+import sys
+sys.modules['__main__'].EnsembleModel = EnsembleModel
 
 # =============================================================================
 # CONFIDENCE SCORING
